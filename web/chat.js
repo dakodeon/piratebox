@@ -52,12 +52,10 @@ function xmlhttpPost(strURL) {
 function chatInit() {
     document.getElementById("chatform").innerHTML = '<strong>Pirate<span style="color: maroon;">ShoutBox</span></strong><br>' + 
 '<form action="/chat" method="post" enctype="application/x-www-form-urlencoded" name="chat"><br>' +
-'<strong>Name</strong><br><input name="name" type="text" value="anonymous" size="20"><br>' +
+'<input name="name" type="text" value="anonymous" placeholder="Nickname"><br>' + '<textarea name="entry" wrap="virtual" placeholder="Message..."></textarea><br>' +
 '<input type="radio" value="black" name="color" checked>B<input type="radio" value="blue" name="color"><font color="blue">B</font><input type="radio" value="green" name="color"><font color="green">G</font><input type="radio" value="orange" name="color"><font color="orange">O</font><input type="radio" value="red" name="color"><font color="red">R</font></strong><br>' +
-'<strong>Message</strong><br>' +
-'<textarea name="entry" cols="30" rows="3" wrap="virtual"></textarea><br>' +
-'<input value="Chat" type="button" onclick=\'JavaScript:xmlhttpPost("/chat")\'>' +
-'</form>';
+'<input value="Send" type="button" onclick=\'JavaScript:xmlhttpPost("/chat")\'>' +
+'</form><hr>';
     xmlhttpGet();
 }
 

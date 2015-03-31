@@ -1,31 +1,33 @@
 @charset "UTF-8";
 
 body, html { 
-	font-family: Helvetica, Arial,sans-serif;
-	font-size: 10pt;
+    font-family: Helvetica, Arial,sans-serif;
+    font-size: 10pt;
 }
 
 #container { 
-	position: absolute;
-	width: 600px;
-	left: 50%;
-	margin-left: -300px;
+    position: relative;
+    width: 100%;
+    min-width: 480px;
+    left: 50%;
+    margin-left: -50%;
 }
 
 #text {
-	float: right; width: 300px;
+    float: right; width: 50%;
 }
 
 #imgsmall {
-	width: 140px;	
+    width: 25%;
+    padding-left: 5%
 }
 
 #chat {
-	position: absolute;
-	float: left;
-	width: 280px;
-	border-right: 1px solid black;
-	padding-right: 10px;
+    position: absolute;
+    float: left;
+    width: 50%;
+    border-right: 1px solid black;
+    padding-right: 10px;
 }
 
 #chatform textarea, #chatform select {

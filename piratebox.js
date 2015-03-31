@@ -9,6 +9,9 @@ var pbTemplates = require( './pbTemplates.js' );
 // Chat System
 var pbChat = require( './pbChat.js' );
 
+// osc configuration
+var oscConf = require('./oscConf.json');
+
 // FTP advertising
 if( pbConfig.FTP != true ) {
     pbTemplates.PAGEFTP = '';
@@ -24,7 +27,12 @@ var http = require( 'http' ),
     url = require( 'url' ),
     path = require( 'path' ),
     formidable = require( 'formidable' ),
-    mime = require( 'mime' );
+    mime = require( 'mime' ),
+    udp = require('dgram'),
+    osc = require('osc-min');
+
+// to send OSC messages
+var oscEmmiter = udp.createSocket("udp4");
 
 // function declarations
 function showError404( res ) {
@@ -115,6 +123,13 @@ form.parse(request, function(err, fields, files) {
                 util.log(err + ' (during chat save)');
             } else {
                 pbChat.post( fields.name, fields.entry, fields.color );
+		var msg = {
+		    address: '/chatMsg',
+		    args: [ fields.name, fields.entry, fields.color ]
+		};
+		var buf = osc.toBuffer(msg);
+		console.log("Chat Message: " + fields.name + ": " + fields.entry);
+		oscEmmiter.send(buf, 0, buf.length, oscConf.port, oscConf.address);
                 res.writeHead(200, {'content-type': 'text/html'});
                 res.end( pbChat.display() );
             }
@@ -201,7 +216,7 @@ form.parse(request, function(err, fields, files) {
         return;
     } 
 */
-    } else if( checkWebDirectory( request.url ) == true ) {
+    } else if( checkWebDirectory( request.url ) == true ) {
         fs.readFile( pbConfig.WEBROOT + request.url, function( err, data ) {
         res.writeHead(200, { 'Content-Type': mime.lookup( pbConfig.WEBROOT + request.url ) } );
         res.end(data);

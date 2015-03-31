@@ -13,7 +13,10 @@ exports.WEBROOT = process.cwd() + '/web';
 exports.CHATFILE = process.cwd() + '/chat.txt';
 
 // port on which the http server runs
-exports.SERVERPORT = 80;
+exports.SERVERPORT = 8686;
+
+// osc out port
+exports.OSCPORT = 57120;
 
 // advertise FTP support (FTP Server needs to be configured manually on your OS)
 exports.FTP = false;
